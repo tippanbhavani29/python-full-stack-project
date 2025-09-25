@@ -64,7 +64,19 @@ def add_asset(user_id: str, coin_id: str, coin_name: str, amount: float, buy_pri
         "buy_price": buy_price
     }).execute()
     return response.data[0] if response.data else None
+def update_asset(user_id: str, coin_id: str, amount: float, buy_price: float) -> Optional[Dict]:
+        response = supabase.table("portfolio") \
+        .update({"amount": amount, "buy_price": buy_price}) \
+        .eq("user_id", user_id).eq("coin_id", coin_id) \
+        .execute()
+        return response.data[0] if response.data else None
 
+def delete_asset(user_id: str, coin_id: str) -> Optional[Dict]:
+    response = supabase.table("portfolio") \
+        .delete() \
+        .eq("user_id", user_id).eq("coin_id", coin_id) \
+        .execute()
+    return response.data[0] if response.data else None
 
 def get_portfolio(user_id: str) -> List[Dict]:
     response = supabase.table("portfolio").select("*").eq("user_id", user_id).execute()
@@ -85,6 +97,9 @@ def add_alert(user_id: str, coin_id: str, target_price: float, alert_type: str) 
 def get_alerts(user_id: str) -> List[Dict]:
     response = supabase.table("alerts").select("*").eq("user_id", user_id).execute()
     return response.data
+def delete_alert(alert_id: str) -> Optional[Dict]:
+    response = supabase.table("alerts").delete().eq("id", alert_id).execute()
+    return response.data[0] if response.data else None
 
 # ---------------- Example flow ---------------- #
 if __name__ == "__main__":
