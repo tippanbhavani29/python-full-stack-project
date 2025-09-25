@@ -26,7 +26,7 @@ operations
 |   |---main.py  #FastAPI endpoints 
 |
 |---frontend/    #Frontend application
-|   |---api.py   #Streamlit web interface
+|   |---app.py   #Streamlit web interface
 |
 |---requirements.txt #python Dependeencie
 |
@@ -85,7 +85,7 @@ create table alerts (
 );
  
 ```
-3. ** Get Your Credentials:
+3. **Get Your Credentials**:
 
 ### 4 .Configure Environment Variables
 
